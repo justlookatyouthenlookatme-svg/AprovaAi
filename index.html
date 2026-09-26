@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AprovaIA — Seu assistente de estudos com Inteligência Artificial</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',    /* Azul escuro profundo */
+                        secondary: '#2563eb',  /* Azul vibrante */
+                        accent: '#38bdf8',     /* Azul claro */
+                        vipGold: '#f59e0b',    /* Dourado VIP */
+                        lightBg: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- CSS Personalizado Separado -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-lightBg text-slate-800 font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-primary text-white w-10 h-10 rounded-xl text-lg font-bold flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-brain text-accent"></i>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-primary">Aprov<span class="text-secondary">AI</span></span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+                <a href="#como-funciona" class="hover:text-secondary transition">Como Funciona</a>
+                <a href="#prompts" class="hover:text-secondary transition">Biblioteca de Prompts</a>
+                <a href="#ferramentas" class="hover:text-secondary transition">Ferramentas Práticas</a>
+                <a href="#ebook" class="hover:text-secondary transition">E-book & VIP</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button id="navVipBtn" onclick="abrirCheckout()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-md transition flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-crown text-amber-100"></i> Área VIP / E-book
+                </button>
+                <div id="badgeVipAtivo" class="hidden bg-amber-100 text-amber-800 border border-amber-300 px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-crown text-amber-600"></i> VIP Ativo
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden py-24 lg:py-36 bg-gradient-to-b from-white via-slate-50 to-slate-100">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-secondary text-sm font-semibold px-4 py-1.5 rounded-full mb-6 shadow-sm">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> A revolução da IA nos estudos para concursos
+            </span>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-primary tracking-tight max-w-4xl mx-auto leading-tight mb-6">
+                Estude para concursos com inteligência e <span class="text-secondary">organização total</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Transforme o ChatGPT e o Claude em seus assistentes pessoais de estudos: monte cronogramas inteligentes, decodifique editais, crie simulados inéditos e acelere sua aprovação.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#prompts" class="bg-primary hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-xl shadow-xl transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-code"></i> Explorar Biblioteca de Prompts
+                </a>
+                <a href="#ebook" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-crown"></i> Desbloquear E-book + 100 Prompts VIP
+                </a>
+            </div>
+            <p class="text-xs text-slate-400 mt-6"><i class="fa-solid fa-triangle-exclamation mr-1"></i> A IA é uma ferramenta de apoio. Legislação e jurisprudência devem sempre ser conferidas em fontes oficiais.</p>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="py-24 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-secondary font-bold text-sm tracking-widest uppercase">Metodologia Exclusiva</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary mt-2 mb-4">Como a IA potencializa sua preparação?</h2>
+                <p class="text-slate-600">Esqueça a ideia de que a IA faz milagres sozinha. O segredo está em utilizá-la em 4 pilares fundamentais da sua jornada rumo ao cargo público.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">1. Planejar</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Converta editais complexos em cronogramas semanais personalizados, distribuindo carga horária e revisões sem esforço.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">2. Aprender</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Peça explicações didáticas de temas difíceis, resumos esquematizados, flashcards e mapas mentais focados na sua banca.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">3. Praticar</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Gere questões inéditas no padrão exato da banca examinadora (Cebraspe, FGV, FCC) e realize simulados sob medida.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-blue-100 text-secondary rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">4. Revisar</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Analise seus erros em simulados, identifique lacunas de conhecimento e monte sessões de repetição espaçada eficientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BIBLIOTECA DE PROMPTS (FREEMIUM) -->
+    <section id="prompts" class="py-24 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-secondary font-bold text-sm tracking-widest uppercase">Copy & Paste Profissional</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary mt-2 mb-4">Biblioteca de Prompts para Concursos</h2>
+                <p class="text-slate-600">Escolha entre a versão gratuita (com prompts essenciais) ou desbloqueie a Área VIP com 100+ prompts avançados e ferramentas exclusivas.</p>
+            </div>
+
+            <!-- Seletor de Abas (Grátis vs VIP) -->
+            <div class="flex justify-center mb-10">
+                <div class="bg-slate-200 p-1.5 rounded-2xl inline-flex gap-2 border border-slate-300 shadow-inner">
+                    <button onclick="switchPromptTab('free')" id="tabBtnFree" class="tab-btn px-6 py-3 rounded-xl font-bold text-sm transition bg-primary text-white shadow-sm flex items-center gap-2">
+                        <i class="fa-solid fa-gift"></i> Prompts Gratuitos (12)
+                    </button>
+                    <button onclick="switchPromptTab('vip')" id="tabBtnVip" class="tab-btn px-6 py-3 rounded-xl font-bold text-sm transition text-slate-700 hover:text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-crown text-amber-500"></i> Biblioteca VIP / E-book (100+) <span id="vipBadgeCount" class="bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full">Bloqueado</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTEÚDO ABA GRATUITA -->
+            <div id="panelFree">
+                <!-- Filtros de Categoria Grátis -->
+                <div class="flex flex-wrap justify-center gap-2 mb-10" id="filterButtonsFree">
+                    <button onclick="filterFree('all')" class="free-filter active bg-primary text-white px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Todos</button>
+                    <button onclick="filterFree('cronograma')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Cronograma</button>
+                    <button onclick="filterFree('edital')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Edital</button>
+                    <button onclick="filterFree('explicacao')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Explicação</button>
+                    <button onclick="filterFree('questoes')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Questões</button>
+                    <button onclick="filterFree('portugues')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Português</button>
+                    <button onclick="filterFree('raciocinio')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Raciocínio Lógico</button>
+                    <button onclick="filterFree('flashcards')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Flashcards</button>
+                    <button onclick="filterFree('legislacao')" class="free-filter bg-white text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition shadow-sm">Legislação</button>
+                </div>
+
+                <!-- Grid com 12+ Prompts Gratuitos -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="freePromptGrid">
+                    
+                    <!-- 1. Cronograma -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="cronograma">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Cronograma</span>
+                                <span class="text-xs text-slate-400 font-mono">#01</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Criador de Cronograma Semanal</h3>
+                            <p class="text-slate-600 text-xs mb-3">Gera agenda distribuindo carga horária, ciclos de estudo, revisões e simulados.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Atue como especialista em concursos. Meu concurso é [NOME]. Cargo: [CARGO]. Horas disponíveis por dia: [X]...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Atue como um especialista em preparação para concursos públicos.\n\nMeu concurso é: [NOME DO CONCURSO]\nCargo: [CARGO]\nData da prova: [DATA]\nHoras disponíveis por dia: [HORAS]\n\nCrie um cronograma semanal considerando peso das matérias, revisões e questões." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 2. Edital -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="edital">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Edital</span>
+                                <span class="text-xs text-slate-400 font-mono">#02</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Transformar Edital em Checklist</h3>
+                            <p class="text-slate-600 text-xs mb-3">Organiza o conteúdo programático bruto em etapas claras com caixas de seleção.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Vou prestar o concurso [NOME]. Abaixo está o edital: [COLE O CONTEÚDO]. Transforme em checklist por disciplina e assunto...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Vou prestar o concurso [NOME]. Abaixo está o conteúdo programático:\n\n[COLE O CONTEÚDO]\n\nTransforme em um checklist de estudos organizado por Disciplina, Assunto, Subassunto e Status, com caixas de seleção." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 3. Explicação -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="explicacao">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Explicação</span>
+                                <span class="text-xs text-slate-400 font-mono">#03</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Explicar Matéria Difícil</h3>
+                            <p class="text-slate-600 text-xs mb-3">Didática focada em concursos: conceito, exemplos e pegadinhas comuns.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Explique o seguinte assunto para concurso: [ASSUNTO]. Use linguagem simples, pontos importantes, exemplos e pegadinhas...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Explique o seguinte assunto como se eu estivesse estudando para concurso:\n\n[ASSUNTO]\n\nEstruture em: 1. Conceito 2. Pontos importantes 3. Exemplos 4. Pegadinhas de prova 5. 5 questões para teste (sem gabarito imediato)." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 4. Questões -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="questoes">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Questões</span>
+                                <span class="text-xs text-slate-400 font-mono">#04</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Criar Questões Inéditas</h3>
+                            <p class="text-slate-600 text-xs mb-3">Gera questões A-E simulando bancas examinadoras com gabarito comentado.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Atue como elaborador de concursos. Crie 10 questões sobre [ASSUNTO]. Nível [MÉDIO]. Banca [FGV]...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Atue como elaborador de questões. Crie 10 questões sobre [ASSUNTO] no nível [MÉDIO] com padrão da banca [BANCA]. Use alternativas A, B, C, D e E. Não mostre o gabarito inicialmente." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 5. Português -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="portugues">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Português</span>
+                                <span class="text-xs text-slate-400 font-mono">#05</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Análise Sintática e Crase</h3>
+                            <p class="text-slate-600 text-xs mb-3">Descomplica regência, crase e sintaxe com regras práticas e macetes de memorização.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Atue como professor de Português para concursos. Explique a regra de [TÓPICO] com exemplos práticos e macetes...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Atue como especialista em Língua Portuguesa para concursos. Explique o seguinte tópico: [TÓPICO - ex: Crase / Regência / Orações Subordinadas]. Forneça 3 regras de ouro e 5 frases para eu classificar." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 6. Raciocínio Lógico -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="raciocinio">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Raciocínio Lógico</span>
+                                <span class="text-xs text-slate-400 font-mono">#06</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Resolução de RLM passo a passo</h3>
+                            <p class="text-slate-600 text-xs mb-3">Ensina a resolver equivalências lógicas, silogismos e diagramas passo a passo.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Atue como professor de RLM. Resolva este problema detalhando o passo a passo lógico: [PROBLEMA]...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Atue como professor de Raciocínio Lógico. Resolva a questão abaixo detalhando o passo a passo lógico, tabela verdade ou diagrama:\n\n[COLE A QUESTÃO]\n\nExplique o raciocínio aplicado para que eu não erre em provas futuras." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 7. Flashcards -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="flashcards">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Flashcards</span>
+                                <span class="text-xs text-slate-400 font-mono">#07</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Gerador de Flashcards de Memorização</h3>
+                            <p class="text-slate-600 text-xs mb-3">Transforma textos longos em perguntas e respostas diretas para Anki ou estudo rápido.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Transforme o conteúdo abaixo em até 20 flashcards formato PERGUNTA / RESPOSTA focados em memorização: [TEXTO]...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Transforme o material abaixo em flashcards para estudo de concurso. Formate estritamente como:\n\nPERGUNTA: ...\nRESPOSTA: ...\n\nCrie no máximo 20 cartões focados em decoreba e leis secas.\n\nMaterial: [COLE O TEXTO]" class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 8. Legislação -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="legislacao">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Legislação</span>
+                                <span class="text-xs text-slate-400 font-mono">#08</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Estudo Didático de Lei Seca</h3>
+                            <p class="text-slate-600 text-xs mb-3">Explica artigos mantendo o texto legal como base, com palavras-chave e pegadinhas.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Explique a lei/artigos abaixo mantendo o texto legal como referência, com exemplos e pegadinhas: [ARTIGOS]...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Vou estudar a seguinte legislação: [LEI / ARTIGOS]. Explique de forma didática com base no texto legal, destacando palavras-chave que as bancas costumam alterar e possíveis pegadinhas." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 9. Redação Discursiva -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="questoes">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Discursiva</span>
+                                <span class="text-xs text-slate-400 font-mono">#09</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Corretor de Redação Discursiva</h3>
+                            <p class="text-slate-600 text-xs mb-3">Simula um examinador avaliando coesão, argumentação e atendimento ao tema.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Atue como corretor de redação de concursos. Avalie o texto abaixo considerando o tema e estrutura dissertativa...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Atue como examinador de redação para concursos públicos. Avalie o texto abaixo sobre o tema [TEMA]. Atribua nota de 0 a 10 e aponte desvios gramaticais, falhas de argumentação e sugestões de melhoria.\n\n[COLE SUA REDAÇÃO]" class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 10. Revisão 24h -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="cronograma">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Revisão</span>
+                                <span class="text-xs text-slate-400 font-mono">#10</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Sessão de Revisão 24h</h3>
+                            <p class="text-slate-600 text-xs mb-3">Cria perguntas rápidas e V/F para consolidar o estudo feito no dia anterior.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Faça uma revisão rápida do assunto estudado ontem: [ASSUNTO]. Crie 10 perguntas rápidas e 5 itens V/F...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Faça uma revisão rápida do assunto abaixo para alguém que estudou ontem: [ASSUNTO]. Crie 10 perguntas rápidas, 5 conceitos fundamentais e 5 itens de Verdadeiro ou Falso (sem gabarito imediato)." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 11. Análise de Erros -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="questoes">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Diagnóstico</span>
+                                <span class="text-xs text-slate-400 font-mono">#11</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Analisador de Erros de Simulados</h3>
+                            <p class="text-slate-600 text-xs mb-3">Identifica o motivo provável dos seus erros e gera nova questão para teste.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Vou enviar minhas questões erradas. Identifique disciplina, conceito a revisar e gere nova questão teste...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Vou enviar abaixo minhas questões erradas de simulado. Para cada erro, identifique: 1. Disciplina 2. Motivo provável do erro 3. Conceito a revisar 4. Dica prática 5. Nova questão para teste.\n\n[COLE SEUS ERROS]" class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                    <!-- 12. Jurisprudência -->
+                    <div class="free-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between" data-cat="legislacao">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full">Jurisprudência</span>
+                                <span class="text-xs text-slate-400 font-mono">#12</span>
+                            </div>
+                            <h3 class="text-base font-bold text-primary mb-2">Resumo de Súmulas e Teses STF/STJ</h3>
+                            <p class="text-slate-600 text-xs mb-3">Explica o entendimento dos tribunais superiores com foco em como cai na prova.</p>
+                            <div class="bg-slate-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border">Explique a tese ou súmula abaixo dos tribunais superiores com foco em pegadinhas de concurso: [TEMA]...</div>
+                        </div>
+                        <button onclick="copyPromptText(this)" data-prompt="Explique a seguinte jurisprudência ou súmula dos tribunais superiores para concurso público: [TEMA OU SÚMULA]. Destaque o entendimento pacificado, exceções cobradas em prova e pegadinhas clássicas." class="w-full bg-slate-100 hover:bg-secondary hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                            <i class="fa-regular fa-copy"></i> Copiar Prompt
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CONTEÚDO ABA VIP (BLOQUEADA PARA NÃO-PAGANTES) -->
+            <div id="panelVip" class="hidden">
+                <!-- Se o usuário não for VIP, exibe tela de upsell bonita -->
+                <div id="vipLockedContainer" class="bg-gradient-to-br from-slate-900 to-blue-950 text-white rounded-3xl p-8 sm:p-14 text-center border border-amber-500/30 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10 max-w-2xl mx-auto">
+                        <div class="w-20 h-20 bg-amber-500/20 text-amber-400 rounded-3xl mx-auto flex items-center justify-center text-3xl font-bold mb-6 border border-amber-500/40 shadow-lg">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <span class="bg-amber-500 text-slate-950 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">Área Exclusiva para Alunos VIP</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold mb-4">Biblioteca 100+ Prompts Avançados & E-book</h3>
+                        <p class="text-slate-300 text-base mb-8 leading-relaxed">
+                            Você está na versão gratuita. Desbloqueie agora a biblioteca completa com mais de 100 prompts ultra-especializados (para discursivas, simulados adaptativos, auditoria de editais, leis complexas) mais o E-book Oficial em PDF.
+                        </p>
+                        <div class="grid sm:grid-cols-3 gap-4 text-left text-sm text-slate-200 mb-8 bg-white/5 p-6 rounded-2xl border border-white/10">
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> 100+ Prompts VIP</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> E-book Completo PDF</div>
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Acesso Vitalício</div>
+                        </div>
+                        <button onclick="abrirCheckout()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-8 py-4 rounded-2xl shadow-xl transition text-lg inline-flex items-center gap-3">
+                            <i class="fa-solid fa-cart-shopping"></i> Adquirir Acesso VIP por Apenas R$ 29,90
+                        </button>
+                        <p class="text-xs text-slate-400 mt-4">Simule a compra para testar o desbloqueio instantâneo nesta mesma tela!</p>
+                    </div>
+                </div>
+
+                <!-- Se o usuário FOR VIP, exibe os prompts avançados desbloqueados -->
+                <div id="vipUnlockedContainer" class="hidden">
+                    <div class="bg-amber-500/10 border border-amber-500/30 p-6 rounded-2xl mb-8 flex items-center justify-between flex-wrap gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-amber-500 text-slate-950 rounded-xl flex items-center justify-center font-bold text-xl">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary text-lg">Parabéns! Sua Área VIP está Ativa.</h4>
+                                <p class="text-xs text-slate-600">Você tem acesso total aos 100+ prompts avançados e ao E-book Oficial.</p>
+                            </div>
+                        </div>
+                        <button onclick="resetarVipParaTeste()" class="bg-white hover:bg-slate-100 text-red-600 border border-red-200 font-semibold px-4 py-2 rounded-xl text-xs transition">
+                            <i class="fa-solid fa-rotate-right"></i> Resetar para Testar Bloqueio
+                        </button>
+                    </div>
+
+                    <!-- Grid de Prompts VIP Exclusivos -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-3xl p-6 border-2 border-amber-400/50 shadow-md flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">VIP • Adaptativo</span>
+                                    <span class="text-xs text-amber-600 font-mono">#VIP-01</span>
+                                </div>
+                                <h3 class="text-base font-bold text-primary mb-2">Simulador de Banca Rigorosa (Cebraspe C/E)</h3>
+                                <p class="text-slate-600 text-xs mb-3">Simula o perfil exato do Cespe onde uma errada anula uma certa, com grau máximo de pegadinha.</p>
+                                <div class="bg-amber-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border border-amber-200">Atue como banca Cebraspe. Crie 20 itens Certo/Errado ultra complexos sobre [ASSUNTO]...</div>
+                            </div>
+                            <button onclick="copyPromptText(this)" data-prompt="Atue como elaborador rigoroso da banca CESPE/CEBRASPE. Crie 20 itens no modelo Certo ou Errado sobre [ASSUNTO]. Inclua pegadinhas jurisprudenciais e jurisprudência recente do STF. Não mostre o gabarito até eu responder." class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                                <i class="fa-regular fa-copy"></i> Copiar Prompt VIP
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-3xl p-6 border-2 border-amber-400/50 shadow-md flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">VIP • Estratégia</span>
+                                    <span class="text-xs text-amber-600 font-mono">#VIP-02</span>
+                                </div>
+                                <h3 class="text-base font-bold text-primary mb-2">Auditoria Completa de Edital por IA</h3>
+                                <p class="text-slate-600 text-xs mb-3">Cruza o edital inteiro com seu histórico de acertos para calcular exatamente o ROI de cada tópico.</p>
+                                <div class="bg-amber-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border border-amber-200">Analise o edital abaixo e cruze com meus pontos fracos para montar um plano de corte cirúrgico...</div>
+                            </div>
+                            <button onclick="copyPromptText(this)" data-prompt="Atue como auditor de concursos públicos. Analise o edital abaixo, estime o peso estatístico de cada matéria com base nas últimas provas da banca e crie um plano de corte focado nos tópicos que mais pontuam.\n\n[COLE O EDITAL]" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                                <i class="fa-regular fa-copy"></i> Copiar Prompt VIP
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-3xl p-6 border-2 border-amber-400/50 shadow-md flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">VIP • Memorização</span>
+                                    <span class="text-xs text-amber-600 font-mono">#VIP-03</span>
+                                </div>
+                                <h3 class="text-base font-bold text-primary mb-2">Gerador de Regras mnemônicas Avançadas</h3>
+                                <p class="text-slate-600 text-xs mb-3">Cria mnemônicos inesquecíveis, piadas lógicas e histórias para decorar prazos e competências.</p>
+                                <div class="bg-amber-50 text-slate-700 p-3 rounded-xl text-[11px] font-mono overflow-x-auto mb-4 max-h-28 border border-amber-200">Crie regras mnemônicas e macetes criativos para decorar os seguintes prazos e artigos de lei: [LISTA]...</div>
+                            </div>
+                            <button onclick="copyPromptText(this)" data-prompt="Atue como especialista em mnemônica e neuroaprendizagem para concursos. Crie regras mnemônicas criativas, frases engraçadas ou acrônimos para memorizar perfeitamente os seguintes conceitos/prazos:\n\n[COLE A LEI OU CONTEÚDO]" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-sm">
+                                <i class="fa-regular fa-copy"></i> Copiar Prompt VIP
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FERRAMENTAS PRÁTICAS INTERATIVAS -->
+    <section id="ferramentas" class="py-24 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-secondary font-bold text-sm tracking-widest uppercase">Laboratório Concurseiro</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary mt-2 mb-4">Ferramentas Práticas na Web</h2>
+                <p class="text-slate-600">Teste simulações rápidas diretamente na plataforma para organizar sua rotina de estudos em segundos.</p>
+            </div>
+
+            <!-- Abas das Ferramentas -->
+            <div class="flex justify-center mb-10">
+                <div class="bg-slate-100 p-1.5 rounded-2xl inline-flex gap-2 border border-slate-200">
+                    <button onclick="switchToolTab('cronograma')" id="tabBtnCronograma" class="tool-tab-btn active px-6 py-3 rounded-xl font-bold text-sm transition bg-white text-primary shadow-sm">🗓️ Gerador de Cronograma</button>
+                    <button onclick="switchToolTab('questoes')" id="tabBtnQuestões" class="tool-tab-btn px-6 py-3 rounded-xl font-bold text-sm transition text-slate-600 hover:text-primary">📝 Simulador Rápido</button>
+                    <button onclick="switchToolTab('analisador')" id="tabBtnAnalisador" class="tool-tab-btn px-6 py-3 rounded-xl font-bold text-sm transition text-slate-600 hover:text-primary">📊 Analisador de Erros</button>
+                </div>
+            </div>
+
+            <!-- Ferramenta 1: Cronograma -->
+            <div id="toolCronograma" class="tool-panel max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold text-primary mb-2">Gerador Inteligente de Cronograma</h3>
+                <p class="text-slate-600 text-sm mb-8">Preencha os dados abaixo para simular a distribuição ideal do seu tempo semanal de estudos.</p>
+                <div class="grid sm:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Concurso / Cargo</label>
+                        <input type="text" id="cronConcurso" placeholder="Ex: Analista TRT" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Horas disponíveis/dia</label>
+                        <input type="number" id="cronHoras" placeholder="Ex: 4" min="1" max="16" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Dias por semana</label>
+                        <input type="number" id="cronDias" placeholder="Ex: 6" min="1" max="7" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                </div>
+                <button onclick="gerarCronogramaSimulado()" class="w-full bg-primary hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg transition">
+                    Gerar Planejamento Semanal
+                </button>
+                <div id="cronogramaResultado" class="mt-8 hidden bg-white border border-blue-200 p-6 rounded-2xl shadow-sm">
+                    <!-- Conteúdo gerado dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Ferramenta 2: Simulador de Questões -->
+            <div id="toolQuestões" class="tool-panel hidden max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold text-primary mb-2">Simulador Rápido de Questões</h3>
+                <p class="text-slate-600 text-sm mb-8">Teste seus conhecimentos com uma questão modelo de Direito Constitucional.</p>
+                <div id="quizContainer">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 mb-6">
+                        <span class="inline-block bg-blue-50 text-secondary text-xs font-bold px-3 py-1 rounded-full mb-3">Direito Constitucional • CESPE/CEBRASPE</span>
+                        <p class="text-slate-800 font-medium mb-6">A República Federativa do Brasil, formada pela união indissolúvel dos Estados e Municípios e do Distrito Federal, constitui-se em Estado Democrático de Direito e tem como fundamentos, entre outros, a soberania e a cidadania.</p>
+                        <div class="space-y-3" id="quizOptions">
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-blue-50 cursor-pointer transition">
+                                <input type="radio" name="quiz" value="certo" class="w-4 h-4 text-secondary">
+                                <span class="font-semibold text-slate-700">CERTO</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-blue-50 cursor-pointer transition">
+                                <input type="radio" name="quiz" value="errado" class="w-4 h-4 text-secondary">
+                                <span class="font-semibold text-slate-700">ERRADO</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="responderQuiz()" class="w-full bg-primary hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg transition">
+                        Responder e Ver Comentário da IA
+                    </button>
+                    <div id="quizFeedback" class="mt-6 hidden p-6 rounded-2xl text-sm"></div>
+                </div>
+            </div>
+
+            <!-- Ferramenta 3: Analisador de Desempenho -->
+            <div id="toolAnalisador" class="tool-panel hidden max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm">
+                <h3 class="text-2xl font-bold text-primary mb-2">Analisador de Desempenho por Disciplina</h3>
+                <p class="text-slate-600 text-sm mb-8">Insira sua porcentagem de acertos nos últimos simulados para receber um diagnóstico automático.</p>
+                <div class="grid sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Português (%)</label>
+                        <input type="number" id="perfPort" placeholder="Ex: 75" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Direito Constitucional (%)</label>
+                        <input type="number" id="perfConst" placeholder="Ex: 85" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Raciocínio Lógico (%)</label>
+                        <input type="number" id="perfRL" placeholder="Ex: 50" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Informática (%)</label>
+                        <input type="number" id="perfInfo" placeholder="Ex: 60" min="0" max="100" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-secondary">
+                    </div>
+                </div>
+                <button onclick="analisarDesempenho()" class="w-full bg-primary hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg transition">
+                    Gerar Diagnóstico Estratégico
+                </button>
+                <div id="perfResultado" class="mt-8 hidden bg-white border border-blue-200 p-6 rounded-2xl shadow-sm">
+                    <!-- Resultado dinâmico -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO E-BOOK & PREÇOS -->
+    <section id="ebook" class="py-24 bg-gradient-to-br from-primary via-slate-900 to-blue-950 text-white relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+                <span class="bg-blue-900/80 border border-blue-700 text-accent text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-6">Pacote Completo + 100 Prompts</span>
+                <h2 class="text-3xl sm:text-5xl font-black mt-2 mb-6 leading-tight">E-book: IA para Concursos Públicos</h2>
+                <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                    O guia definitivo para concurseiros que querem dominar a inteligência artificial sem cair em armadilhas. Aprenda a estruturar cronogramas, decodificar editais complexos, criar flashcards e revisar com eficiência cirúrgica.
+                </p>
+                <ul class="space-y-4 mb-10 text-slate-200">
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-accent"></i> Mais de 100 prompts prontos para copiar e colar</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-accent"></i> Estratégias avançadas para Legislação, Português e Exatas</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-accent"></i> Como evitar alucinações e verificar fontes oficiais</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-accent"></i> Acesso imediato em PDF + atualizações vitalícias</li>
+                </ul>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl p-8 sm:p-12 rounded-3xl border border-white/15 text-center shadow-2xl">
+                <div class="bg-white text-slate-900 p-8 rounded-2xl shadow-xl max-w-sm mx-auto">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl mx-auto flex items-center justify-center text-3xl font-bold mb-6">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Área VIP & E-book</span>
+                    <h3 class="text-2xl font-black mt-3 mb-1 text-primary">Kit Concurseiro IA</h3>
+                    <p class="text-slate-500 text-sm mb-6">E-book PDF + 100+ Prompts Avançados</p>
+                    <div class="flex items-center justify-center gap-2 mb-6">
+                        <span class="text-slate-400 line-through text-lg">R$ 97,00</span>
+                        <span class="text-4xl font-black text-secondary">R$ 29,90</span>
+                    </div>
+                    <button onclick="abrirCheckout()" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-4 rounded-xl transition shadow-lg text-base flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping"></i> Comprar e Desbloquear VIP
+                    </button>
+                    <p class="text-xs text-slate-400 mt-4">Garantia incondicional de 7 dias</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL DE CHECKOUT SIMULADO -->
+    <div id="modalCheckout" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="fecharCheckout()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 text-xl font-bold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl mx-auto flex items-center justify-center text-xl font-bold mb-3">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <h3 class="text-2xl font-black text-primary">Checkout Seguro</h3>
+                <p class="text-slate-500 text-xs mt-1">E-book AprovaIA + 100+ Prompts VIP</p>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-2xl border mb-6 flex justify-between items-center">
+                <div>
+                    <span class="text-xs text-slate-500 block">Total a pagar:</span>
+                    <strong class="text-xl text-primary font-black">R$ 29,90</strong>
+                </div>
+                <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">Acesso Imediato</span>
+            </div>
+
+            <form onsubmit="simularCompra(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Seu Nome Completo</label>
+                    <input type="text" id="checkNome" required placeholder="Ex: Carlos Silva" class="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-secondary">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Seu E-mail (para envio do E-book PDF)</label>
+                    <input type="email" id="checkEmail" required placeholder="carlos@email.com" class="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-secondary">
+                </div>
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-3.5 rounded-xl shadow-md transition text-base">
+                        Confirmar Pagamento Simulado
+                    </button>
+                </div>
+            </form>
+            <p class="text-[11px] text-slate-400 text-center mt-4">🔒 Ambiente seguro simulado para demonstração.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-10 mb-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="bg-secondary text-white w-9 h-9 rounded-xl text-base font-bold flex items-center justify-center">
+                        <i class="fa-solid fa-brain text-white"></i>
+                    </div>
+                    <span class="text-2xl font-black text-white">Aprov<span class="text-secondary">AI</span></span>
+                </div>
+                <p class="text-slate-400 text-sm max-w-sm mb-6 leading-relaxed">
+                    Sua plataforma de apoio inteligente para concursos públicos. Otimize sua rotina, estude com método e conquiste sua vaga.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Navegação</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#como-funciona" class="hover:text-white transition">Como Funciona</a></li>
+                    <li><a href="#prompts" class="hover:text-white transition">Biblioteca de Prompts</a></li>
+                    <li><a href="#ferramentas" class="hover:text-white transition">Ferramentas Práticas</a></li>
+                    <li><a href="#ebook" class="hover:text-white transition">E-book & VIP</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Aviso Legal</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    AprovaIA é uma ferramenta educacional de suporte tecnológico. Não garantimos aprovação sem esforço e recomendamos conferir leis e editais em diários oficiais.
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
+            © 2026 AprovaIA. Todos os direitos reservados. Feito para concurseiros exigentes.
+        </div>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            verificarStatusVip();
+        });
+
+        function verificarStatusVip() {
+            const isVip = localStorage.getItem('aprovaia_vip') === 'true';
+            const vipBadgeCount = document.getElementById('vipBadgeCount');
+            const badgeVipAtivo = document.getElementById('badgeVipAtivo');
+            const vipLockedContainer = document.getElementById('vipLockedContainer');
+            const vipUnlockedContainer = document.getElementById('vipUnlockedContainer');
+            const navVipBtn = document.getElementById('navVipBtn');
+
+            if (isVip) {
+                vipBadgeCount.textContent = 'Desbloqueado';
+                vipBadgeCount.className = "bg-green-500 text-white text-xs px-2 py-0.5 rounded-full";
+                badgeVipAtivo.classList.remove('hidden');
+                navVipBtn.classList.add('hidden');
+                vipLockedContainer.classList.add('hidden');
+                vipUnlockedContainer.classList.remove('hidden');
+            } else {
+                vipBadgeCount.textContent = 'Bloqueado';
+                vipBadgeCount.className = "bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full";
+                badgeVipAtivo.classList.add('hidden');
+                navVipBtn.classList.remove('hidden');
+                vipLockedContainer.classList.remove('hidden');
+                vipUnlockedContainer.classList.add('hidden');
+            }
+        }
+
+        function abrirCheckout() {
+            document.getElementById('modalCheckout').classList.remove('hidden');
+        }
+
+        function fecharCheckout() {
+            document.getElementById('modalCheckout').classList.add('hidden');
+        }
+
+        function simularCompra(event) {
+            event.preventDefault();
+            const nome = document.getElementById('checkNome').value;
+            localStorage.setItem('aprovaia_vip', 'true');
+            fecharCheckout();
+            verificarStatusVip();
+            switchPromptTab('vip');
+            alert(`🎉 Parabéns, ${nome}! Sua compra foi simulada com sucesso e a Área VIP do AprovaIA foi desbloqueada no seu navegador.`);
+        }
+
+        function resetarVipParaTeste() {
+            localStorage.removeItem('aprovaia_vip');
+            verificarStatusVip();
+            switchPromptTab('free');
+            alert("Estado VIP resetado para testes. A biblioteca VIP está bloqueada novamente.");
+        }
+
+        function switchPromptTab(tab) {
+            const tabBtnFree = document.getElementById('tabBtnFree');
+            const tabBtnVip = document.getElementById('tabBtnVip');
+            const panelFree = document.getElementById('panelFree');
+            const panelVip = document.getElementById('panelVip');
+
+            if (tab === 'free') {
+                tabBtnFree.className = "tab-btn px-6 py-3 rounded-xl font-bold text-sm transition bg-primary text-white shadow-sm flex items-center gap-2";
+                tabBtnVip.className = "tab-btn px-6 py-3 rounded-xl font-bold text-sm transition text-slate-700 hover:text-primary flex items-center gap-2";
+                panelFree.classList.remove('hidden');
+                panelVip.classList.add('hidden');
+            } else {
+                tabBtnVip.className = "tab-btn px-6 py-3 rounded-xl font-bold text-sm transition bg-amber-500 text-slate-950 shadow-sm flex items-center gap-2";
+                tabBtnFree.className = "tab-btn px-6 py-3 rounded-xl font-bold text-sm transition text-slate-700 hover:text-primary flex items-center gap-2";
+                panelVip.classList.remove('hidden');
+                panelFree.classList.add('hidden');
+            }
+        }
+
+        function filterFree(category) {
+            const buttons = document.querySelectorAll('.free-filter');
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'bg-primary', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            event.target.classList.add('active', 'bg-primary', 'text-white');
+            event.target.classList.remove('bg-white', 'text-slate-700');
+
+            const cards = document.querySelectorAll('.free-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function copyPromptText(button) {
+            const promptText = button.getAttribute('data-prompt');
+            navigator.clipboard.writeText(promptText).then(() => {
+                const originalContent = button.innerHTML;
+                button.innerHTML = '<i class="fa-solid fa-check text-green-600"></i> Copiado!';
+                button.classList.add('bg-green-50', 'text-green-700', 'border', 'border-green-200');
+                setTimeout(() => {
+                    button.innerHTML = originalContent;
+                    button.classList.remove('bg-green-50', 'text-green-700', 'border', 'border-green-200');
+                }, 2000);
+            });
+        }
+
+        function switchToolTab(tabName) {
+            const tabs = ['cronograma', 'questões', 'analisador'];
+            tabs.forEach(t => {
+                const panel = document.getElementById('tool' + t.charAt(0).toUpperCase() + t.slice(1));
+                const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+                if (t === tabName) {
+                    panel.classList.remove('hidden');
+                    btn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+                    btn.classList.remove('text-slate-600');
+                } else {
+                    panel.classList.add('hidden');
+                    btn.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                    btn.classList.add('text-slate-600');
+                }
+            });
+        }
+
+        function gerarCronogramaSimulado() {
+            const concurso = document.getElementById('cronConcurso').value || 'Concurso Público';
+            const horas = document.getElementById('cronHoras').value || '4';
+            const dias = document.getElementById('cronDias').value || '6';
+            const resultado = document.getElementById('cronogramaResultado');
+
+            resultado.classList.remove('hidden');
+            resultado.innerHTML = `
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-blue-100 text-secondary rounded-xl flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-primary text-lg">Plano Sugerido para: ${concurso}</h4>
+                        <p class="text-xs text-slate-500">${horas}h diárias • ${dias} dias por semana</p>
+                    </div>
+                </div>
+                <div class="space-y-3 text-sm text-slate-700">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                        <span><strong>Bloco 1 (Teoria & Lei Seca):</strong> 60% do tempo diário</span>
+                        <span class="text-xs bg-blue-100 text-secondary font-bold px-2 py-1 rounded">Fundação</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                        <span><strong>Bloco 2 (Resolução de Questões):</strong> 30% do tempo diário</span>
+                        <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2 py-1 rounded">Fixação</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+                        <span><strong>Bloco 3 (Revisão Espaçada 24h):</strong> 10% do tempo diário</span>
+                        <span class="text-xs bg-green-100 text-green-700 font-bold px-2 py-1 rounded">Memória</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function responderQuiz() {
+            const selected = document.querySelector('input[name="quiz"]:checked');
+            const feedback = document.getElementById('quizFeedback');
+            feedback.classList.remove('hidden');
+
+            if (!selected) {
+                feedback.className = "mt-6 p-6 rounded-2xl text-sm bg-yellow-50 border border-yellow-200 text-yellow-800";
+                feedback.innerHTML = "⚠️ Por favor, selecione uma alternativa antes de enviar.";
+                return;
+            }
+
+            if (selected.value === 'certo') {
+                feedback.className = "mt-6 p-6 rounded-2xl text-sm bg-green-50 border border-green-200 text-green-800";
+                feedback.innerHTML = "<strong>✅ Resposta Correta!</strong><br>O art. 1º, caput e inciso I da CF/88 estabelecem exatamente que a República Federativa do Brasil constitui-se em Estado Democrático de Direito e tem como fundamentos a soberania e a cidadania.";
+            } else {
+                feedback.className = "mt-6 p-6 rounded-2xl text-sm bg-red-50 border border-red-200 text-red-800";
+                feedback.innerHTML = "<strong>❌ Resposta Incorreta.</strong><br>A assertiva está <strong>Certa</strong>. A soberania e a cidadania são fundamentos da República (Art. 1º, CF/88).";
+            }
+        }
+
+        function analisarDesempenho() {
+            const port = parseFloat(document.getElementById('perfPort').value) || 0;
+            const const_ = parseFloat(document.getElementById('perfConst').value) || 0;
+            const rl = parseFloat(document.getElementById('perfRL').value) || 0;
+            const info = parseFloat(document.getElementById('perfInfo').value) || 0;
+            const resultado = document.getElementById('perfResultado');
+
+            const media = (port + const_ + rl + info) / 4;
+            let diagnostico = "";
+
+            if (media >= 80) {
+                diagnostico = "🚀 <strong>Nível Avançado:</strong> Você está em excelente ritmo! Foque em simulados de reta final e revisão por flashcards.";
+            } else if (media >= 60) {
+                diagnostico = "⚠️ <strong>Nível Intermediário:</strong> Boa base consolidada, mas há lacunas nas disciplinas com menor pontuação. Utilize a IA para gerar questões específicas dos seus pontos fracos.";
+            } else {
+                diagnostico = "📚 <strong>Nível Inicial:</strong> É hora de focar na construção da base teórica e simplificação de conceitos complexos.";
+            }
+
+            resultado.classList.remove('hidden');
+            resultado.innerHTML = `
+                <h4 class="font-bold text-primary text-lg mb-2">Diagnóstico Geral: ${media.toFixed(1)}% de aproveitamento médio</h4>
+                <p class="text-sm text-slate-700 mb-4">${diagnostico}</p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-bold">
+                    <div class="p-3 bg-slate-50 rounded-xl border">Português: ${port}%</div>
+                    <div class="p-3 bg-slate-50 rounded-xl border">Constitucional: ${const_}%</div>
+                    <div class="p-3 bg-slate-50 rounded-xl border">Raciocínio Lógico: ${rl}%</div>
+                    <div class="p-3 bg-slate-50 rounded-xl border">Informática: ${info}%</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
